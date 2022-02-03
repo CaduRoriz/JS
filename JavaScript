@@ -1,0 +1,107 @@
+Java Script
+
+const array = new Array (
+	"item",
+	"item 2",
+	"item 3"
+);
+
+
+array.push("item 4");
+
+-- como se declara array e como adiciona um item nela
+
+para eu criar uma lista de objetos eu crio um 'Map'
+
+const listaDeObjeto = new Map(
+	['190011424', 'Carlos'],
+	['181122323', 'Carlin']
+
+);
+
+-- MAIORIA DAS ANOTAÇÕES DENTRO DOS PROPRIOS FILES DE CODIGO --
+
+IMPORT E EXPORT
+
+suponhamos um FILE de nome 'Modulo':
+
+const variavel = 'valor';
+const variavel2= 'outro valor';
+
+export default variavel;
+
+------------------------------------- agora outro file
+
+import Modulo;
+
+console.log(Modulo);
+
+vai printar na tela 'Valor'
+----------------------------------
+eu só importo de uma page o que dentro dela eu mando exportar, e assim a variavel2 nao fica disponivel para a importacao.
+
+
+---------------- JAVA SCRIPT WEB -------------
+
+devemos analisar onde vamos chamar a tag <script> no arquivo html pois na maior parte da situação o file.js vai depender da renderização do body para ser utilizado, ou seja, o script na maior parte das vezes(ou pelo menos na parte que tece as pages) deve ser chamado na tag body
+
+-------------------------
+
+
+funcao que busca um elemento pelo seu seletor(seja tag html, id ou classe):
+
+querySelector('seletor'); 
+
+o parametro eu passo igual no css, se for nome da tag é direto o nome da tag 'button', se for classe '.classe', se for id '#identificador'.
+
+para isso eu tenho que pasasr para o querySelector o escopo onde ele deve procurar o seletor, geralmente no doc HTML entao eu tenho que passar a refrencia 'document' antes e assim seleciona o documento por inteiro, ex: document.querySelector('.seletor');
+
+----------
+
+no java script onClick eh um atributo, entao eu tenho que passar algo para ele, ex:
+
+document.querySelector('.classeGenerica').onClick = funcaoFazalgo;
+
+dessa forma eu pego o atributo onClick e coloco o valor pra ele como a funcao.
+
+** eu não coloco os parenteses () na funcao pq se eu o fizer é como se eu tivesse mandando a page reproduzir o som no momento que to atribuindo ao atributo onClick o valor da funcao, dai pra eu fazer com que a page execute a funcao apenas no ação eu apenas referencio a funcao na atribuição do atributo, assim como feito acima** 
+
+-----------------------------------------
+como adicionei o evento as teclas... primeiro crio umafuncao para tocar o som quando ela for chamada (tocaSom). depois meio que pego todas as teclas e coloco numa lista seleiconando-as através da sua classe em comum '.tecla' e armazeno na variável (listaDeTeclas). após isso crio um for para que se percorra em toda a lista e fçao o seguinte passo, pego a tecla do flow no caso listaDeTeclas[contador] e armazeno em uma variável 'tecla', seleciono a classe específica daquela classe atráves do metodo classList[1] e armazeno na variavel 'instrumento' e após isso crio a classe que eu quero adicionar na tecla idAudio = `#som_${instrumento}`... depois isso apenas chamo a funcao tocaSom (de forma abstrata para que ela não execute o ato assim que instanciada, podendo ser uma arroe function)
+
+function tocaSom (idElementoAudio) {
+    document.querySelector(idElementoAudio).play();
+}
+
+const listaDeTeclas = document.querySelectorAll('.tecla');
+
+
+//para
+
+    for (let contador = 0; contador < listaDeTeclas.length; contador++) {
+
+    const tecla = listaDeTeclas[contador];
+    const instrumento = tecla.classList[1];
+    const idAudio = `#som_${instrumento}`; //template string
+
+    tecla.onclick = function () {
+        tocaSom(idAudio);
+    }
+
+}
+---------------------------------------
+
+quando aciono uma funcao a partir de um evento no js, ex: 
+
+tecla.onKeydown = function (evento) {
+        console.log(evento);    
+    }
+    
+    posso passar um parametro pra function que representará aquele evento ocorrido, no caso a tecla pressionada.
+    
+------------------------------------------
+
+== vs === 
+
+o == nas comparações retornacomo true por exemplo 1 == '1', ou seja pegou um numero e deu como verdade a igualdade com uma string, ja o === retornaria falso isso, por isso em situações em que ue pego eventos e outros é melhor eu usar o === pq de alguma forma posso retornar o codigo da tecla e e não a tecla pressionada e acionaria o evento, ou o click do mouse e etc...
+
